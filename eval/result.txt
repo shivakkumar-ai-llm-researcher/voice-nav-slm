@@ -1,0 +1,1 @@
+Samples: 1050 | Intent Acc: 51.81% | Slot Precision: 46.34% | Slot Recall: 87.32% | Slot F1: 60.55%

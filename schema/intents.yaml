@@ -1,0 +1,242 @@
+# Voice Navigation Intent & Slot Schema
+# Covers Firstclick HRMS and SalesPro CRM modules
+
+intents:
+  NAVIGATE:
+    description: "Navigate to a specific screen or section in the app"
+    slots:
+      - target_screen
+    examples:
+      - "open {target_screen}"
+      - "go to {target_screen}"
+      - "take me to {target_screen}"
+      - "show me {target_screen}"
+      - "navigate to {target_screen}"
+      - "switch to {target_screen}"
+      - "view {target_screen}"
+      - "bring up {target_screen}"
+      - "open up {target_screen}"
+      - "launch {target_screen}"
+      - "jump over to {target_screen}"
+      - "i need to check {target_screen}"
+      - "open up the {target_screen} tab"
+      - "display {target_screen} screen"
+      - "head to {target_screen}"
+      - "get me {target_screen}"
+      - "let me see {target_screen}"
+      - "route to {target_screen}"
+      - "show {target_screen}"
+      - "open {target_screen} page"
+
+  SEARCH:
+    description: "Search for records, entities, or queries within a screen or globally"
+    slots:
+      - query
+      - target_screen
+    examples:
+      - "search for {query}"
+      - "search {query} in {target_screen}"
+      - "find {query}"
+      - "find {query} inside {target_screen}"
+      - "look for {query}"
+      - "look up {query}"
+      - "search employee {query}"
+      - "find lead {query}"
+      - "query {query} in {target_screen}"
+      - "where is {query} located"
+      - "find me details for {query}"
+      - "locate {query} under {target_screen}"
+      - "pull up records for {query}"
+      - "filter search for {query}"
+      - "search {query}"
+
+  TOGGLE:
+    description: "Enable, disable, or turn on/off app settings and module features"
+    slots:
+      - target_feature
+      - value
+    examples:
+      - "turn {value} {target_feature}"
+      - "{value} {target_feature}"
+      - "enable {target_feature}"
+      - "disable {target_feature}"
+      - "switch {value} {target_feature}"
+      - "toggle {target_feature}"
+      - "can we {value} {target_feature}"
+      - "set {target_feature} to {value}"
+      - "make {target_feature} {value}"
+      - "i want {target_feature} turned {value}"
+      - "adjust settings for {target_feature}"
+
+  FILTER:
+    description: "Apply filters to lists, tables, or pipelines"
+    slots:
+      - filter_key
+      - filter_value
+    examples:
+      - "filter by {filter_key} {filter_value}"
+      - "show only {filter_value} {filter_key}"
+      - "filter {filter_key} equal to {filter_value}"
+      - "sort by {filter_key}"
+      - "narrow down by {filter_key} {filter_value}"
+      - "only display {filter_value} items for {filter_key}"
+      - "arrange by {filter_key}"
+      - "show items where {filter_key} is {filter_value}"
+
+  CREATE:
+    description: "Trigger creation or application modals/forms"
+    slots:
+      - target_item
+    examples:
+      - "create new {target_item}"
+      - "add {target_item}"
+      - "apply for {target_item}"
+      - "new {target_item}"
+      - "file a {target_item}"
+      - "submit {target_item}"
+      - "start a new {target_item}"
+      - "fill out a {target_item}"
+      - "i need to enter a {target_item}"
+      - "record a new {target_item}"
+      - "log a {target_item}"
+
+  BACK:
+    description: "Navigate back to the previous screen"
+    slots: []
+    examples:
+      - "go back"
+      - "previous screen"
+      - "back"
+      - "return to previous page"
+      - "take me back"
+      - "get out of here"
+      - "return to where i was"
+      - "take me one step back"
+      - "exit current view"
+      - "go to previous page"
+
+  SCROLL:
+    description: "Scroll the view in a specified direction"
+    slots:
+      - direction
+    examples:
+      - "scroll {direction}"
+      - "move {direction}"
+      - "go {direction}"
+      - "page {direction}"
+      - "scroll to {direction}"
+      - "slide {direction}"
+      - "pan {direction}"
+      - "swipe {direction}"
+      - "move view {direction}"
+
+screens:
+  - name: "dashboard"
+    synonyms: ["home", "main screen", "overview", "hrms home"]
+    app: "hrms"
+  - name: "employee_list"
+    synonyms: ["employees", "staff directory", "team members", "colleagues", "people"]
+    app: "hrms"
+  - name: "attendance"
+    synonyms: ["clock in", "timesheet", "attendance logs", "punch records", "work hours"]
+    app: "hrms"
+  - name: "payroll"
+    synonyms: ["payslips", "salary", "payslip history", "compensation", "wages"]
+    app: "hrms"
+  - name: "leave_requests"
+    synonyms: ["leaves", "time off", "vacation requests", "pto", "leave tracker"]
+    app: "hrms"
+  - name: "performance_reviews"
+    synonyms: ["performance", "appraisals", "kpis", "review scores", "evaluations"]
+    app: "hrms"
+  - name: "expense_claims"
+    synonyms: ["expenses", "reimbursements", "travel claims", "receipts"]
+    app: "hrms"
+  - name: "shift_roster"
+    synonyms: ["roster", "shift schedule", "work schedule", "shifts"]
+    app: "hrms"
+  - name: "company_assets"
+    synonyms: ["assets", "inventory", "assigned hardware", "devices"]
+    app: "hrms"
+  - name: "documents"
+    synonyms: ["company documents", "policies", "contracts", "files"]
+    app: "hrms"
+  - name: "hrms_settings"
+    synonyms: ["hrms config", "hr preferences", "organization setup"]
+    app: "hrms"
+  - name: "user_profile"
+    synonyms: ["my profile", "account details", "personal info", "my details"]
+    app: "hrms"
+
+  - name: "leads_overview"
+    synonyms: ["leads", "lead list", "prospects", "inquiries"]
+    app: "salespro"
+  - name: "deals_pipeline"
+    synonyms: ["deals", "sales pipeline", "kanban board", "opportunities"]
+    app: "salespro"
+  - name: "contacts"
+    synonyms: ["clients", "customer directory", "client list", "people contacts"]
+    app: "salespro"
+  - name: "accounts"
+    synonyms: ["companies", "client accounts", "organizations", "business accounts"]
+    app: "salespro"
+  - name: "tasks"
+    synonyms: ["task list", "todo list", "follow ups", "action items"]
+    app: "salespro"
+  - name: "meetings"
+    synonyms: ["calendar", "scheduled calls", "appointments", "events"]
+    app: "salespro"
+  - name: "sales_reports"
+    synonyms: ["analytics", "revenue reports", "sales performance", "charts", "metrics"]
+    app: "salespro"
+  - name: "quotations_invoices"
+    synonyms: ["invoices", "quotes", "billing", "estimates"]
+    app: "salespro"
+  - name: "product_catalog"
+    synonyms: ["products", "services", "pricing list", "inventory catalog"]
+    app: "salespro"
+  - name: "crm_settings"
+    synonyms: ["crm config", "sales settings", "pipeline setup"]
+    app: "salespro"
+
+features:
+  - name: "dark_mode"
+    synonyms: ["dark theme", "night mode", "dark appearance"]
+  - name: "notifications"
+    synonyms: ["push notifications", "alerts", "sound notifications"]
+  - name: "location_tracking"
+    synonyms: ["gps tracking", "location services", "geo checkin"]
+  - name: "auto_sync"
+    synonyms: ["automatic sync", "background sync", "cloud sync"]
+  - name: "offline_mode"
+    synonyms: ["offline cache", "local mode"]
+
+toggle_values:
+  on: ["on", "enable", "activate", "turn on"]
+  off: ["off", "disable", "deactivate", "turn off"]
+
+items:
+  - name: "leave_request"
+    synonyms: ["leave", "vacation request", "time off application", "pto request"]
+  - name: "expense_claim"
+    synonyms: ["expense", "reimbursement claim", "receipt upload"]
+  - name: "lead"
+    synonyms: ["new lead", "prospect", "sales lead", "client inquiry"]
+  - name: "deal"
+    synonyms: ["new deal", "opportunity", "sales deal"]
+  - name: "contact"
+    synonyms: ["new contact", "client contact", "customer record"]
+  - name: "task"
+    synonyms: ["new task", "followup task", "todo item"]
+  - name: "meeting"
+    synonyms: ["new meeting", "call appointment", "schedule meeting"]
+  - name: "invoice"
+    synonyms: ["new invoice", "quotation", "billing estimate"]
+
+directions:
+  - "up"
+  - "down"
+  - "top"
+  - "bottom"
+  - "left"
+  - "right"

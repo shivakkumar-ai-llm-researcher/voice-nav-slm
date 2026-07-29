@@ -1,0 +1,9 @@
+{
+  "total_test_samples": 1050,
+  "intent_accuracy_percent": 51.81,
+  "slot_precision_percent": 46.34,
+  "slot_recall_percent": 87.32,
+  "slot_f1_percent": 60.55,
+  "average_confidence": 0.9411,
+  "passed_target_bar": false
+}
