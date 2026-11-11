@@ -10,33 +10,29 @@ SCHEMA_PATH = Path(__file__).parent.parent / "schema" / "intents.yaml"
 OUTPUT_DIR = Path(__file__).parent / "generated"
 
 PREFIXES = [
-    "", "", "", "",
+    "", "", "",
     "please ",
     "can you ",
     "could you ",
     "hey assistant ",
     "assistant ",
     "kindly ",
-    "i want to ",
-    "would you ",
-    "uh ", "um ", "hey "
+    "i want to "
 ]
 
 SUFFIXES = [
-    "", "", "", "",
+    "", "", "",
     " please",
     " right now",
     " for me",
-    " thanks",
-    " quick"
+    " thanks"
 ]
 
 FILLER_QUERIES = [
     "John Doe", "Jane Smith", "Acme Corp", "TechCorp", "Q3 Sales",
     "annual report", "pending leave", "marketing lead", "high priority",
     "software engineer", "invoice #1042", "project alpha", "client meeting",
-    "unpaid salary", "sales pipeline", "product roadmap", "active deals",
-    "robert tan", "sarah connor", "lead #55"
+    "unpaid salary", "sales pipeline", "product roadmap", "active deals"
 ]
 
 FILTER_KEYS = ["status", "date", "priority", "department", "amount", "stage", "assignee"]
@@ -124,6 +120,7 @@ def generate_samples(schema, catalogs, num_samples_per_intent=1000):
     intents_config = schema.get("intents", {})
 
     for intent_name, intent_data in intents_config.items():
+        # Standard training templates ONLY
         examples = intent_data.get("examples", [])
 
         for _ in range(num_samples_per_intent):
@@ -188,16 +185,14 @@ def main():
     schema = load_schema()
     catalogs = build_catalogs(schema)
 
-    print("Generating comprehensive intent/slot synthetic dataset...")
+    print("Generating standard training and validation synthetic dataset...")
     all_data = generate_samples(schema, catalogs, num_samples_per_intent=1200)
 
     total = len(all_data)
-    train_end = int(0.75 * total)
-    val_end = int(0.85 * total)
+    train_end = int(0.85 * total)
 
     train_data = all_data[:train_end]
-    val_data = all_data[train_end:val_end]
-    test_novel_data = all_data[val_end:]
+    val_data = all_data[train_end:]
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -208,12 +203,10 @@ def main():
 
     write_jsonl(OUTPUT_DIR / "train.jsonl", train_data)
     write_jsonl(OUTPUT_DIR / "val.jsonl", val_data)
-    write_jsonl(OUTPUT_DIR / "test_novel.jsonl", test_novel_data)
 
-    print(f"\nSynthetic JSONL Dataset Generation Complete!")
-    print(f"  Train:      {len(train_data):4d} ({OUTPUT_DIR / 'train.jsonl'})")
-    print(f"  Val:        {len(val_data):4d} ({OUTPUT_DIR / 'val.jsonl'})")
-    print(f"  Test Novel: {len(test_novel_data):4d} ({OUTPUT_DIR / 'test_novel.jsonl'})")
+    print(f"\nTraining/Validation JSONL Dataset Generation Complete!")
+    print(f"  Train: {len(train_data):4d} ({OUTPUT_DIR / 'train.jsonl'})")
+    print(f"  Val:   {len(val_data):4d} ({OUTPUT_DIR / 'val.jsonl'})")
 
 if __name__ == "__main__":
     main()

@@ -4,18 +4,22 @@ from pathlib import Path
 from model import VoiceNavSLM
 
 MODEL_DIR = Path(__file__).parent
+EXPORT_DIR = MODEL_DIR.parent / "export"
 VOCAB_PATH = MODEL_DIR / "tokenizer" / "vocab.json"
+LABELS_PATH = EXPORT_DIR / "labels.json"
 MODEL_PATH = MODEL_DIR / "voice_nav_slm.pt"
 
 def load_inference_engine():
     with open(VOCAB_PATH, "r", encoding="utf-8") as f:
         meta = json.load(f)
+    with open(LABELS_PATH, "r", encoding="utf-8") as f:
+        labels_meta = json.load(f)
 
     word2idx = meta["word2idx"]
-    intent2idx = meta["intent2idx"]
-    idx2intent = {int(k): v for k, v in meta["idx2intent"].items()}
-    tag2idx = meta["tag2idx"]
-    idx2tag = {int(k): v for k, v in meta["idx2tag"].items()}
+    intent2idx = labels_meta["intent2idx"]
+    idx2intent = {int(k): v for k, v in labels_meta["idx2intent"].items()}
+    tag2idx = labels_meta["tag2idx"]
+    idx2tag = {int(k): v for k, v in labels_meta["idx2tag"].items()}
 
     model = VoiceNavSLM(
         vocab_size=len(word2idx),
